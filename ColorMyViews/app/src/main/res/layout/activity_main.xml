@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/box_one_text"
+    android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/box_one_text"
         style="@style/WhiteBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -29,10 +29,10 @@
         android:layout_marginTop="16dp"
         android:text="@string/box_two"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/box_one_text" />
 
     <TextView
-        android:id="@+id/box_tree_text"
+        android:id="@+id/box_three_text"
         style="@style/WhiteBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
         app:layout_constraintBottom_toTopOf="@+id/box_five_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/box_two_text"
-        app:layout_constraintTop_toBottomOf="@+id/box_tree_text" />
+        app:layout_constraintTop_toBottomOf="@+id/box_three_text" />
 
     <TextView
         android:id="@+id/box_five_text"
