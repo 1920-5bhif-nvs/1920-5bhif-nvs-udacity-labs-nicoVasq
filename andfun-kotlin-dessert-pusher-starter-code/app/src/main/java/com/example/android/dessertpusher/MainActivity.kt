@@ -27,11 +27,13 @@ import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleObserver
 import com.example.android.dessertpusher.databinding.ActivityMainBinding
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     private var revenue = 0
     private var dessertsSold = 0
+    private lateinit var dessertTimer: DessertTimer
 
     // Contains all the views
     private lateinit var binding: ActivityMainBinding
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.i("MainActivity", "onCreate() called");
+        Timber.i( "onCreate() called");
 
         // Use Data Binding to get reference to the views
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -74,6 +76,9 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         binding.dessertButton.setOnClickListener {
             onDessertClicked()
         }
+
+        //Setup timer
+        dessertTimer = DessertTimer()
 
         // Set the TextViews to the right values
         binding.revenue = revenue
@@ -139,28 +144,30 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
     }
 
     override fun onResume() {
-        Log.i("MainActivity", "onResume() called")
         super.onResume()
+        Timber.i("onResume() called")
     }
 
     override fun onDestroy() {
-        Log.i("MainActivity", "onDestroy() called")
         super.onDestroy()
+        Timber.i( "onDestroy() called")
     }
 
     override fun onStop() {
-        Log.i("MainActivity", "onStop() called")
         super.onStop()
+        dessertTimer.stopTimer()
+        Timber.i("onStop() called")
     }
 
     override fun onPause() {
-        Log.i("MainActivity", "onPause() called")
         super.onPause()
+        Timber.i("onPause() called")
     }
 
     override fun onStart() {
-        Log.i("MainActivity", "onStart() called")
         super.onStart()
+        dessertTimer.startTimer()
+        Timber.i( "onStart() called")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
