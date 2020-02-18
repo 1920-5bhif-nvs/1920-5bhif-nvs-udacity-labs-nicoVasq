@@ -18,6 +18,7 @@ package com.example.android.dessertpusher
 
 import android.content.ActivityNotFoundException
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -28,6 +29,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleObserver
 import com.example.android.dessertpusher.databinding.ActivityMainBinding
 import timber.log.Timber
+
+private const val KEY_REVENUE = "key_revenue"
+private const val KEY_DESSERT_SOLD = "key_dessert_sold"
 
 class MainActivity : AppCompatActivity(), LifecycleObserver {
 
@@ -79,6 +83,11 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
         //Setup timer
         dessertTimer = DessertTimer(this.lifecycle)
+
+        if(savedInstanceState != null){
+            revenue = savedInstanceState.getInt(KEY_REVENUE)
+            dessertsSold = savedInstanceState.getInt(KEY_DESSERT_SOLD)
+        }
 
         // Set the TextViews to the right values
         binding.revenue = revenue
@@ -168,6 +177,15 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         super.onStart()
         //dessertTimer.startTimer()
         Timber.i( "onStart() called")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+
+        outState?.putInt(KEY_REVENUE, revenue)
+        outState?.putInt(KEY_DESSERT_SOLD, dessertsSold)
+
+        Timber.i("onSaveInstanceState() called")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
