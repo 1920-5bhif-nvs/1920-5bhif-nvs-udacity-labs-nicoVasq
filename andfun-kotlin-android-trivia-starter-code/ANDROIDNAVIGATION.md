@@ -1,4 +1,4 @@
-#### Fourth Lesson
+#### Third Lesson
 
 Developing apps with multiple screens (destination) and navigation patterns in Android Studio
 
