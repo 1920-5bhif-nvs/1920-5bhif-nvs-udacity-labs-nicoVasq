@@ -56,14 +56,9 @@ class GameFragment : Fragment() {
         //Get viewModel from ViewModelProvider
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
+        binding.gameViewModel = viewModel
 
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
 
         //Set up observer relationship
         viewModel.score.observe(this, Observer { newScore ->
@@ -83,6 +78,9 @@ class GameFragment : Fragment() {
         viewModel.timerText.observe(this, Observer { timer ->
             binding.timerText.text = timer
         })
+
+
+
 
         return binding.root
 
