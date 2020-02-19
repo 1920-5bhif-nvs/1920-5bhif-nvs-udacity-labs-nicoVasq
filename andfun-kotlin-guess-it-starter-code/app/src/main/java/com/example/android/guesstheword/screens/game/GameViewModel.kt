@@ -1,5 +1,7 @@
 package com.example.android.guesstheword.screens.game
 
+import android.os.CountDownTimer
+import android.text.format.DateUtils
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,20 +27,60 @@ class GameViewModel : ViewModel(){
         get() = _eventGameFinish
 
 
+    private val _currentTime = MutableLiveData<Long>()
+    val currentTime: LiveData<Long>
+        get() = _currentTime
+
+    private val _timerText = MutableLiveData<String>()
+    val timerText: LiveData<String>
+        get() = _timerText
+
+    companion object {
+        // These represent different important times
+        // This is when the game is over
+        const val DONE = 0L
+        // This is the number of milliseconds in a second
+        const val ONE_SECOND = 1000L
+        // This is the total time of the game
+        const val COUNTDOWN_TIME = 15000L
+    }
+
+    private val timer: CountDownTimer
+
     init {
         Log.i("GameViewModel", "GameViewModel created!")
 
         _eventGameFinish.value = false
+        _currentTime.value = 0L
+        _timerText.value = ""
 
         resetList()
         nextWord()
 
         _word.value = ""
         _score.value = 0
+
+        //create countdown timer
+        timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                _currentTime.value = (_currentTime.value)?.plus(1)
+
+                _timerText.value = DateUtils.formatElapsedTime(_currentTime.value ?: 0L)
+            }
+
+            override fun onFinish() {
+                _eventGameFinish.value = true;
+            }
+        }
+
+        timer.start()
     }
 
     override fun onCleared() {
         Log.i("GameViewModel", "GameViewModel destroyed!")
+        super.onCleared()
+        timer.cancel()
     }
 
 
@@ -78,8 +120,8 @@ class GameViewModel : ViewModel(){
     private fun nextWord() {
         //Select and remove a word from the list
         if (wordList.isEmpty()) {
-           // gameFinished()
-            _eventGameFinish.value = true
+            resetList()
+
         } else {
             _word.value = wordList.removeAt(0)
         }

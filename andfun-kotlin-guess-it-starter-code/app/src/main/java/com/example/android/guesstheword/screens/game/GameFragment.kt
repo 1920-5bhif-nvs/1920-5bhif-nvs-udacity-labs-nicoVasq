@@ -80,6 +80,9 @@ class GameFragment : Fragment() {
                 viewModel.onGameFinishComplete()
             }
         })
+        viewModel.timerText.observe(this, Observer { timer ->
+            binding.timerText.text = timer
+        })
 
         return binding.root
 
