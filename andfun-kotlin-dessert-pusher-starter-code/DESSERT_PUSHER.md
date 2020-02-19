@@ -2,6 +2,8 @@
 
 Exercises to get a better understanding of the lifecycle of our android apps.
 
+
+
 #### Mayor points
 
 - Activity States / Lifecycles 
