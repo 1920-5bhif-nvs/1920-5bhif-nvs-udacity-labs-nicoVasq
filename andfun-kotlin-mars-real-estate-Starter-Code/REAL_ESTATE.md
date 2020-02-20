@@ -8,6 +8,11 @@ Real estate app that connects to the internet and get real time photos from mars
 * RESTful Services
   * Rest Requests
   * Response Data
-* Libraries 
-  * Retrofit 
-* 
+* Retrofit (Library)
+  * Typesafe HTTP Client (for Android)
+  * Using the API
+* Moshi (Library)
+  * Fetching content from Json-Data
+* Permissons
+* Display Images that are loaded from the internet
+  * Glide Library
