@@ -15,3 +15,39 @@
  */
 
 package com.example.android.trackmysleepquality.sleeptracker
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.android.trackmysleepquality.R
+import com.example.android.trackmysleepquality.TextItemViewHolder
+import com.example.android.trackmysleepquality.database.SleepNight
+import kotlinx.android.synthetic.main.header.view.*
+
+class SleepNightAdapter : RecyclerView.Adapter<TextItemViewHolder>(){
+
+    var data = listOf<SleepNight>()
+    set(value) {
+        field = value
+        notifyDataSetChanged() //Tells the RecyclerView, that some data might have changed
+    }
+
+    override fun getItemCount() = data.size
+
+    override fun onBindViewHolder(holder: TextItemViewHolder, position: Int) {
+        var item = data[position]
+        holder.textView.text = item.sleepQuality.toString()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextItemViewHolder {
+        //For inflating new views
+        val layoutInflater = LayoutInflater.from(parent.context)
+        //Inflate view
+        val view = layoutInflater.inflate(R.layout.text_item_view, parent, false) as TextView
+
+        return TextItemViewHolder(view)
+    }
+
+
+}
