@@ -37,6 +37,10 @@ class SleepTrackerViewModel(
     val navigateToSleepDataQuality
         get() = _navigateToSleepDataQuality
 
+    fun onSleepNightClicked(id: Long){
+        _navigateToSleepDataQuality.value = id
+    }
+
     /**
      * viewModelJob allows us to cancel all coroutines started by this ViewModel.
      */
