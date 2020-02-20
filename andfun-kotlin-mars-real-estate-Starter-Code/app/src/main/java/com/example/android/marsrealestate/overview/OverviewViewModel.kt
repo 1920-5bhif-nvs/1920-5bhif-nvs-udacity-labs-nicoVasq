@@ -21,6 +21,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.marsrealestate.network.MarsApi
+import com.example.android.marsrealestate.network.MarsApiFilter
 import com.example.android.marsrealestate.network.MarsProperty
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +38,7 @@ class OverviewViewModel : ViewModel() {
     private val _status = MutableLiveData<MarsApiStatus>()
     val status: LiveData<MarsApiStatus>
         get() = _status
+
 
 
     private val _properties = MutableLiveData<List<MarsProperty>>()
@@ -65,6 +67,7 @@ class OverviewViewModel : ViewModel() {
      */
     init {
         getMarsRealEstateProperties()
+        getMarsRealEstateProperties(MarsApiFilter.SHOW_ALL)
     }
 
     /**
@@ -87,6 +90,12 @@ class OverviewViewModel : ViewModel() {
 
     }
 
+    private fun getMarsRealEstateProperties(filter: MarsApiFilter) {
+        var getPropertiesDeferred = MarsApi.retrofitService.getProperties(filter.value)
+    }
+    fun updateFilter(filter: MarsApiFilter) {
+        getMarsRealEstateProperties(filter)
+    }
 
     override fun onCleared() {
         super.onCleared()
