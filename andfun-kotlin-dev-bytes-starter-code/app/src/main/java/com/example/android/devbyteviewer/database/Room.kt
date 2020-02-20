@@ -17,6 +17,7 @@
 
 package com.example.android.devbyteviewer.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -24,7 +25,7 @@ interface VideoDao {
 
     //For loading values of the cache
     @Query("select * from databasevideo")
-    fun getVideos(): List<DatabaseVideo>
+    fun getVideos(): LiveData<List<DatabaseVideo>>
 
     //For storing values in the cache
     @Insert(onConflict = OnConflictStrategy.REPLACE)
