@@ -34,6 +34,6 @@
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         android:padding="2dp"
-        android:text="@{viewModel.property.imgSrcUrl}"
+        app:imageUrl="@{viewModel.property.imgSrcUrl}"
         tools:src="@tools:sample/backgrounds/scenic"/>
 </layout>
